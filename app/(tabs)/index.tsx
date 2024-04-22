@@ -111,15 +111,15 @@ export default function Screen() {
             <Text>Update</Text>
           </Button>
 
-          <Button
-            variant="outline"
-            className="shadow shadow-foreground/5"
-            // onPress={updateProgressValue}
-          >
-            <Link href="/schedule">
+          <Link href="/schedule">
+            <Button
+              variant="outline"
+              className="shadow shadow-foreground/5"
+              // onPress={updateProgressValue}
+            >
               <Text>Schedule</Text>
-            </Link>
-          </Button>
+            </Button>
+          </Link>
         </CardFooter>
       </Card>
     </View>
