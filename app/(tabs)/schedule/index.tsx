@@ -170,7 +170,9 @@ export default function Schedule() {
         <TabsList className="flex-row w-full">
           {schedules.map((day, index) => (
             <TabsTrigger value={day.day} className="flex-1" key={index}>
-              <Text className="uppercase">{day.day.substring(0, 3)}</Text>
+              <Text className="text-xs uppercase">
+                {day.day.substring(0, 3)}
+              </Text>
             </TabsTrigger>
           ))}
         </TabsList>
@@ -223,7 +225,6 @@ export default function Schedule() {
             )}
 
             {/* Render add button at the bottom */}
-
             <View className="p-4">
               <Link href="/schedule/create" className="text-center">
                 <Text className="font-semibold text-3xl text-center">+</Text>
