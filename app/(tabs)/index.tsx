@@ -115,7 +115,7 @@ export default function Screen() {
             <Button
               variant="outline"
               className="shadow shadow-foreground/5"
-              // onPress={updateProgressValue}
+            // onPress={updateProgressValue}
             >
               <Text>Schedule</Text>
             </Button>
