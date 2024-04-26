@@ -10,6 +10,8 @@ import { Pen, X } from "lucide-react-native";
 // import DateTimePicker from "@mohalla-tech/react-native-date-time-picker"
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { cssInterop } from "nativewind";
+import { addSubject, addSchedule } from "~/api/api";
+import { Subject, Instructor, Schedule } from "~/api/types";
 
 
 
@@ -22,6 +24,7 @@ export default function CreateSchedule() {
         },
     });
 
+    const [subject, setSubject] = useState("");
     const [days, setDays] = useState<string[]>([]);
     const [startTime, setStartTime] = useState("");
     const [endTime, setEndTime] = useState("");
@@ -55,30 +58,7 @@ export default function CreateSchedule() {
     };
 
     const handleSave = async () => {
-
-        //create a post request to the api, that handles the promise and error
-
-        try {
-            const response = await fetch("http://192.168.254.112:8081/api/subject", {
-                method: "POST",
-                body: JSON.stringify({
-                    name: "test2323",
-                }),
-                headers: {
-                    "Content-type": "application/json; charset=UTF-8"
-                }
-            })
-                .then((response) => {
-                    console.log(response);
-                    return response.json();
-                })
-                .then((json) => console.log(json)); cors.php
-            console.log("sendingggg dataaaaa")
-        } catch (error) {
-            console.log("errrror occured: ", error)
-        }
-
-        console.log("sendingggg dataaaaa")
+        addSubject({ name: subject });
     }
 
 
@@ -88,8 +68,8 @@ export default function CreateSchedule() {
                 <Text className="font-bold text-2xl pb-2">Add Schedule</Text>
                 <Input
                     placeholder='Subject'
-                    // value={ }
-                    // onChangeText={ }
+                    value={subject}
+                    onChangeText={setSubject}
                     aria-labelledbyledBy='inputLabel'
                     aria-errormessage='inputError'
                 />
