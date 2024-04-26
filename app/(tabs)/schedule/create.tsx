@@ -10,8 +10,8 @@ import { Pen, X } from "lucide-react-native";
 // import DateTimePicker from "@mohalla-tech/react-native-date-time-picker"
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { cssInterop } from "nativewind";
-import { addSubject, addSchedule } from "~/api/api";
-import { Subject, Instructor, Schedule } from "~/api/types";
+import { addSubject, addInstructor, addSchedule } from "~/api/api";
+import { Subject, Instructor, Schedule, Days } from "~/api/types";
 
 
 
@@ -25,6 +25,7 @@ export default function CreateSchedule() {
     });
 
     const [subject, setSubject] = useState("");
+    const [instructor, setInstructor] = useState("");
     const [days, setDays] = useState<string[]>([]);
     const [startTime, setStartTime] = useState("");
     const [endTime, setEndTime] = useState("");
@@ -58,7 +59,25 @@ export default function CreateSchedule() {
     };
 
     const handleSave = async () => {
-        addSubject({ name: subject });
+        const subjectObj = await addSubject({ name: subject });
+        const instructorObj = await addInstructor({ name: instructor });
+
+
+        days.forEach(async (day) => {
+            console.log("day: ", day);
+            const scheduleObj: Schedule = {
+                subject_id: subjectObj.subject.id,
+                instructor_id: instructorObj.instructor.id,
+                start_time: startTime,
+                end_time: endTime,
+                //@ts-ignore
+                day_of_week: day
+            };
+
+            await addSchedule(scheduleObj);
+            console.log("scheduleObj: ", scheduleObj);
+        })
+
     }
 
 
@@ -75,8 +94,8 @@ export default function CreateSchedule() {
                 />
                 <Input
                     placeholder='Instructor'
-                    // value={ }
-                    // onChangeText={ }
+                    value={instructor}
+                    onChangeText={setInstructor}
                     aria-labelledbyledBy='inputLabel'
                     aria-errormessage='inputError'
                 />
@@ -162,7 +181,6 @@ export default function CreateSchedule() {
                     {startTime && endTime ? (
                         <>
                             <Text className="text-sm p-1 opacity-80">Repeat every</Text>
-
                             <View>
 
                                 <ToggleGroup value={days} onValueChange={setDays} className="w-full flex-wrap text-xs" type='multiple'>

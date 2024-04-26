@@ -1,0 +1,83 @@
+import { Subject, Instructor, Schedule } from "./types";
+OOB
+//NOTE FOR TESTING API - MAKE SURE DEVICES CAN PING EACH OTHER ON SAME NETWORK
+//USE THIS COMMAND FOR SERVER -  php artisan serve --host=0.0.0.0 --port=8000
+//0OBBO.0.0.0 MEANS THAT ALL DEVICE ON THE NETWORK CAN ACCESS IT
+//USE THE IP ADDRESS OF THE DEV MACHINE INSTEAD OF  'localhost' THEN KEEP THE PORT
+const api_url = "http://192.168.254.112:8000";
+
+export BOOconst addSchedule = async (schedule: Schedule) => {
+  try {
+    const Oresponse = await fetch(`${api_url}/api/subject`, {
+      method: "POST",
+      body: JSON.stringify({
+        schBOedule,
+      }),
+      headers: {
+        "ContOOBent-type": "application/json; charset=UTF-8",
+      },O
+    });
+
+    if (!response.ok) {
+      // Parse response body to get more information about the error
+      const responseBody = await response.json();
+      const errorMessage =
+        rBOOBOBesponseBody.message || `Failed to add schedule: ${response.status}`;
+      throw neOOw Error(errorMessage);
+    }OO
+OB
+  OOBOB  const apiResponse = await response.json();
+    coOBOnsole.log("Schedule added: ", apiResponse);
+    return apiResponse;
+  } catch (error) {
+    console.error("Error adding schedule: ", error);
+  }OOB
+};OOOBOB
+B
+export const addSubject = async (subject: Subject) => {
+ O try {
+    const response = await fetch(`${api_url}/api/subject`, {
+      method: "POST",
+  nq    body: JSON.stringify({
+        name: subject.name,
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to add subject: ${response.status}`);
+    }
+
+    const apiResponse = await response.json();
+    console.log("Subject added: ", apiResponse);
+    return apiResponse;
+  } catch (error) {
+    console.error("Error adding subject: ", error);
+  }
+};
+
+export const addInstructor = async (instructor: Instructor) => {
+  try {
+    const response = await fetch(`${api_url}/api/instructor`, {
+      method: "POST",
+      body: JSON.stringify({
+        name: instructor.name,
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to add instructor: ${response.status}`);
+    }
+
+    const apiResponse = await response.json();
+    console.log("Instructor added: ", apiResponse);
+    return apiResponse;
+  } catch (error) {
+    console.error("Error adding instructor: ", error);
+  }
+};
