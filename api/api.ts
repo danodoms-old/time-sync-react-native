@@ -1,38 +1,11 @@
 import { Subject, Instructor, Schedule } from "./types";
+import axios from "axios";
 
 //NOTE FOR TESTING API - MAKE SURE DEVICES CAN PING EACH OTHER ON SAME NETWORK
 //USE THIS COMMAND FOR SERVER -  php artisan serve --host=0.0.0.0 --port=8000
 //0.0.0.0 MEANS THAT ALL DEVICE ON THE NETWORK CAN ACCESS IT
 //USE THE IP ADDRESS OF THE DEV MACHINE INSTEAD OF  'localhost' THEN KEEP THE PORT
-const api_url = "http://192.168.254.112:8000";
-
-// export const addSchedule = async (schedule: Schedule) => {
-//   try {
-//     const response = await fetch(`${api_url}/api/schedule`, {
-//       method: "POST",
-//       body: JSON.stringify({
-//         subject_id: schedule.subject_id,
-//         instructor_id: schedule.instructor_id,
-//         start_time: schedule.start_time,
-//         end_time: schedule.end_time,
-//         day_of_week: schedule.day_of_week,
-//       }),
-//       headers: {
-//         "Content-type": "application/json; charset=UTF-8",
-//       },
-//     });
-
-//     if (!response.ok) {
-//       throw await response.json();
-//     }
-
-//     const apiResponse = await response.json();
-//     console.log("Schedule added: ", apiResponse);
-//     return apiResponse;
-//   } catch (error) {
-//     console.error("Error adding schedule: ", error);
-//   }
-// };
+const api_url = "http://192.168.254.117:8000";
 
 export const addSchedule = async (schedule: Schedule) => {
   try {
@@ -44,72 +17,124 @@ export const addSchedule = async (schedule: Schedule) => {
       day_of_week: schedule.day_of_week,
     };
 
-    const response = await fetch(`${api_url}/api/schedule`, {
-      method: "POST",
-      body: JSON.stringify(scheduleObj),
+    const response = await axios.post(`${api_url}/api/schedule`, scheduleObj, {
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
     });
 
-    const responseData = await response.json(); // Parse response data once
-
-    if (!response.ok) {
-      throw responseData; // Throw parsed response data
-    }
-
-    console.log("Schedule added: ", responseData);
-    return responseData;
+    console.log("Schedule added: ", response.data);
+    return response.data;
   } catch (error) {
-    console.error("Error adding schedule: ", error);
+    console.error("Error adding schedule: ", error.response.data);
     // throw error; // Rethrow the error for further handling
   }
 };
 
 export const addSubject = async (subject: Subject) => {
   try {
-    const response = await fetch(`${api_url}/api/subject`, {
-      method: "POST",
-      body: JSON.stringify({
+    const response = await axios.post(
+      `${api_url}/api/subject`,
+      {
         name: subject.name,
-      }),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
       },
-    });
+      {
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      }
+    );
 
-    if (!response.ok) {
-      throw await response.json();
-    }
-
-    const apiResponse = await response.json();
-    console.log("Subject added: ", apiResponse);
-    return apiResponse;
+    console.log("Subject added: ", response.data);
+    return response.data;
   } catch (error) {
-    console.error("Error adding subject: ", error);
+    console.error("Error adding subject: ", error.response.data);
   }
 };
 
 export const addInstructor = async (instructor: Instructor) => {
   try {
-    const response = await fetch(`${api_url}/api/instructor`, {
-      method: "POST",
-      body: JSON.stringify({
+    const response = await axios.post(
+      `${api_url}/api/instructor`,
+      {
         name: instructor.name,
-      }),
+      },
+      {
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      }
+    );
+
+    console.log("Instructor added: ", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error adding instructor: ", error.response.data);
+  }
+};
+
+export const getSchedules = async () => {
+  try {
+    const response = await axios.get(`${api_url}/api/schedules`, {
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
     });
 
-    if (!response.ok) {
-      throw await response.json();
-    }
+    const schedules = response.data;
 
-    const apiResponse = await response.json();
-    console.log("Instructor added: ", apiResponse);
-    return apiResponse;
+    console.log("Schedules fetched: ", schedules);
+    return schedules;
   } catch (error) {
-    console.error("Error adding instructor: ", error);
+    console.error("Error fetching schedules: ", error.response.data);
+    throw new Error("Error fetching schedules");
   }
 };
+
+//! deprecated
+// export const getSchedules = async () => {
+//   try {
+//     const response = await fetch(`${api_url}/api/schedules`, {
+//       method: "GET",
+//       headers: {
+//         "Content-type": "application/json; charset=UTF-8",
+//       },
+//     });
+
+//     if (!response.ok) {
+//       throw await response.json();
+//     }
+
+//     const apiResponse = await response.json();
+//     const schedules = JSON.stringify(apiResponse.schedules);
+
+//     console.log("Schedules fetched: ", schedules);
+//     return schedules;
+//   } catch (error) {
+//     console.error("Error fetching schedules: ", error);
+//   }
+// };
+
+//! deprecated
+// export const getSchedules = () => {
+//   return fetch(`${api_url}/api/schedules`, {
+//     method: "GET",
+//     headers: {
+//       "Content-type": "application/json; charset=UTF-8",
+//     },
+//   })
+//     .then((response) => {
+//       if (!response.ok) {
+//         throw response.json();
+//       }
+//       return response.json();
+//     })
+//     .then((apiResponse) => {
+//       const schedules = apiResponse.schedules;
+//       console.log("Schedules fetched: ", schedules);
+//       return schedules;
+//     })
+//     .catch((error) => {
+//       console.error("Error fetching schedules: ", error);
+//     });
+// };
