@@ -1,15 +1,15 @@
 import * as Tooltip from '@radix-ui/react-tooltip';
 import * as React from 'react';
 import { Pressable, View, type GestureResponderEvent } from 'react-native';
-import { useAugmentedRef, useControllableState } from '~/src/components/primitives/hooks';
-import * as Slot from '~/src/components/primitives/slot';
+import { useAugmentedRef, useControllableState } from '~/components/primitives/hooks';
+import * as Slot from '~/components/primitives/slot';
 import type {
   PositionedContentProps,
   PressableRef,
   SlottablePressableProps,
   SlottableViewProps,
   ViewRef,
-} from '~/src/components/primitives/types';
+} from '~/components/primitives/types';
 import type {
   RootContext,
   TooltipOverlayProps,

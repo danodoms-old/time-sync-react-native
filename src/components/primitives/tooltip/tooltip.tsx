@@ -11,16 +11,16 @@ import {
   useControllableState,
   useRelativePosition,
   type LayoutPosition,
-} from '~/src/components/primitives/hooks';
-import { Portal as RNPPortal } from '~/src/components/primitives/portal';
-import * as Slot from '~/src/components/primitives/slot';
+} from '~/components/primitives/hooks';
+import { Portal as RNPPortal } from '~/components/primitives/portal';
+import * as Slot from '~/components/primitives/slot';
 import type {
   PositionedContentProps,
   PressableRef,
   SlottablePressableProps,
   SlottableViewProps,
   ViewRef,
-} from '~/src/components/primitives/types';
+} from '~/components/primitives/types';
 import type {
   RootContext,
   TooltipOverlayProps,

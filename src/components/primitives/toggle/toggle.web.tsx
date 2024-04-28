@@ -1,8 +1,8 @@
 import * as Toggle from '@radix-ui/react-toggle';
 import * as React from 'react';
 import { Pressable, type GestureResponderEvent } from 'react-native';
-import * as Slot from '~/src/components/primitives/slot';
-import type { PressableRef, SlottablePressableProps } from '~/src/components/primitives/types';
+import * as Slot from '~/components/primitives/slot';
+import type { PressableRef, SlottablePressableProps } from '~/components/primitives/types';
 import type { ToggleRootProps } from './types';
 
 const Root = React.forwardRef<PressableRef, SlottablePressableProps & ToggleRootProps>(

@@ -2,7 +2,7 @@
 
 import { Model } from "@nozbe/watermelondb";
 import { field, text } from "@nozbe/watermelondb/decorators";
-import { Days } from "~/src/api/types";
+import { Days } from "~/api/types";
 
 export default class Schedule extends Model {
   static table = "schedules";
@@ -18,7 +18,7 @@ export default class Schedule extends Model {
   //@ts-ignore
   @text("start_time") start_time: string;
   //@ts-ignore
-  @test("end_time") end_time: string;
+  @text("end_time") end_time: string;
   //@ts-ignore
   @text("day_of_week") day_of_week: Days;
 }

@@ -1,17 +1,17 @@
 import { View, ScrollView } from "react-native";
-import { Text } from "~/src/components/ui/text";
-import { Input } from "~/src/components/ui/input";
-import { Button } from "~/src/components/ui/button";
+import { Text } from "~/components/ui/text";
+import { Input } from "~/components/ui/input";
+import { Button } from "~/components/ui/button";
 // import { Bold, Italic, Underline } from '~/components/Icons';
-import { ToggleGroup, ToggleGroupIcon, ToggleGroupItem } from '~/src/components/ui/toggle-group';
+import { ToggleGroup, ToggleGroupIcon, ToggleGroupItem } from '~/components/ui/toggle-group';
 import { useState } from "react";
-import { Card } from "~/src/components/ui/card";
+import { Card } from "~/components/ui/card";
 import { Pen, X } from "lucide-react-native";
 // import DateTimePicker from "@mohalla-tech/react-native-date-time-picker"
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { cssInterop } from "nativewind";
-import { addSubject, addInstructor, addSchedule } from "~/src/api/api";
-import { Subject, Instructor, Schedule, Days } from "~/src/api/types";
+import { addSubject, addInstructor, addSchedule } from "~/api/api";
+import { Subject, Instructor, Schedule, Days } from "~/api/types";
 
 
 
